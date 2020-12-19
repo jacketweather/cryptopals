@@ -46,6 +46,7 @@ void tests1c5(void) {
 int main(void) {
 
 	teststrcmp();
+	testHammingDistance();
 	printf("Passed util funcs tests.\n");
 
 	//tests1c1();
@@ -53,6 +54,11 @@ int main(void) {
 	//tests1c3();
 	//tests1c4();
 	//tests1c5();
+
+	for (const auto i : bytes(string("Hello"))) {
+		cout << i << " ";
+	}
+	
 	printf("Passed all tests.\n");
 	getchar();
 

@@ -2,3 +2,5 @@
 #include <assert.h>
 
 void teststrcmp(void);
+
+void testHammingDistance(void);

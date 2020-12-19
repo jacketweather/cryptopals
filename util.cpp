@@ -1,17 +1,65 @@
 #pragma once
 #include "util.h"
 
-/* convert raw bytes into hex string */
-string byteToHex(vector<unsigned char> src) {
-	char hex[17] = "0123456789abcdef";
-	string dst;
+
+vector<unsigned int> bytes(string src) {
+
+	vector<unsigned int> dst;
 
 	for (size_t idx = 0; idx < src.size(); ++idx) {
-		dst.push_back(hex[src[idx] >> 4]);
-		dst.push_back(hex[src[idx] & 15]);
+		dst.push_back((unsigned char) src[idx]);
 	}
-	
+
 	return dst;
+
+}
+
+/* return hamming distance between two byte arrays (the number of differing bits)*/
+unsigned int hammingDistance(vector<unsigned int> a, vector<unsigned int> b) {
+
+	for (unsigned int i : a) {
+		cout << i << " ";
+	}
+	cout << "\n";
+	for (unsigned int i : b) {
+		cout << i << " ";
+	}
+	cout << "\n";
+
+	size_t count = 0;
+	size_t idx = 0;
+
+	if (a.size() == 0 && b.size() == 0) {
+		return 0;
+	}
+	else if (a.size() != 0 && b.size() == 0) {
+		return a.size() * 8;
+	}
+	else if (a.size() == 0 && b.size() != 0) {
+		return b.size() * 8;
+	}
+
+	while (idx < a.size() && idx < b.size()) {
+
+		unsigned int diff = a[idx] ^ b[idx];
+
+		/* now count number of different bits*/
+		for (size_t test = 0; test <= 7; ++test) {
+			if (((diff >> test) & 1) == 1) {
+				++count;
+			}
+		}
+		++idx;
+	}
+
+	if (idx >= a.size() && idx < b.size()) {
+		count += (b.size() - idx) * 8;
+	}
+	else if (idx >= b.size() && idx < a.size()) {
+		count += (b.size() - idx) * 8;
+	}
+
+	return count;
 
 }
 
@@ -123,7 +171,6 @@ char itoc(int i) {
 	return (char) (i + 97 - 10);
 
 }
-
 
 /* compares two string buffers. true if same, false if not */
 bool streq(const char* l, const char* r) {

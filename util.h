@@ -12,5 +12,9 @@ unordered_map<char, int>		Counter(string s);
 unordered_map<char, float>		normCounter(unordered_map<char, int> s);
 float							englishDistance(unordered_map<char, float> dist, unordered_map<char, float> sample);
 void							strlower(char* s);
-string							byteToHex(vector<unsigned char> src);
 string							charToHex(unsigned char src);
+
+/* string to byte array */
+vector<unsigned int>			bytes(string src);
+/* # diff bits */
+unsigned int					hammingDistance(vector<unsigned int> a, vector<unsigned int> b);

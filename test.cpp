@@ -32,3 +32,20 @@ void teststrcmp(void) {
 	assert(streq("hi", "hit") == false);
 	assert(streq("onetwothree", "onetwot") == false);
 }
+
+
+
+void testHammingDistance(void) {
+
+	vector<unsigned int> v1 = bytes("this is a test");
+	vector<unsigned int> v2 = bytes("wokka wokka!!!");
+	assert(hammingDistance(v1, v2) == 37);
+	assert(hammingDistance(vector<unsigned int>(bytes("aaa")), vector<unsigned int>(bytes("aaa"))) == 0);
+	assert(hammingDistance(vector<unsigned int>(bytes("aab")), vector<unsigned int>(bytes("aaa"))) == 2);
+	assert(hammingDistance(vector<unsigned int>(bytes("aa")), vector<unsigned int>(bytes("aaa"))) == 8);
+	assert(hammingDistance(vector<unsigned int>(bytes("ab")), vector<unsigned int>(bytes("aaa"))) == 10);
+	assert(hammingDistance(vector<unsigned int>(bytes("a")), vector<unsigned int>(bytes("aaa"))) == 16);
+	assert(hammingDistance(vector<unsigned int>(bytes("b")), vector<unsigned int>(bytes("aaa"))) == 18);
+	assert(hammingDistance(vector<unsigned int>(bytes("")), vector<unsigned int>(bytes("aaa"))) == 24);
+
+}
