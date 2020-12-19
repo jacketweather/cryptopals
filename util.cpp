@@ -1,6 +1,31 @@
 #pragma once
 #include "util.h"
 
+/* convert raw bytes into hex string */
+string byteToHex(vector<unsigned char> src) {
+	char hex[17] = "0123456789abcdef";
+	string dst;
+
+	for (size_t idx = 0; idx < src.size(); ++idx) {
+		dst.push_back(hex[src[idx] >> 4]);
+		dst.push_back(hex[src[idx] & 15]);
+	}
+	
+	return dst;
+
+}
+
+/* convert character into hex representation */
+string charToHex(unsigned char src) {
+	char hex[17] = "0123456789abcdef";
+	string dst;
+
+	dst.push_back(hex[src >> 4]);
+	dst.push_back(hex[src & 15]);
+
+	return dst;
+}
+
 /*
 * similar to Counter in python; returns key : counts
 */
@@ -27,6 +52,7 @@ unordered_map<char, int> Counter(string s) {
 
 }
 
+/* normalize unordered_map vals*/
 unordered_map<char, float> normCounter(unordered_map<char, int> s) {
 	// normalize 
 	int sum = 0;
@@ -39,6 +65,23 @@ unordered_map<char, float> normCounter(unordered_map<char, int> s) {
 	}
 
 	return cnt;
+
+}
+
+float englishDistance(unordered_map<char, float> dist, unordered_map<char, float> sample) {
+
+	float diff = 0;
+
+	for (pair<char, float> ele : sample) {
+		if (dist.find(ele.first) == dist.end()) {
+			diff += 1;
+		}
+		else {
+			diff += abs(ele.second - dist[ele.first]);
+		}
+	}
+
+	return diff;
 
 }
 
@@ -58,9 +101,9 @@ void strlower(char* s) {
 
 }
 
-/* converts hex character into integer representation
+/* converts hex character into byte representation
 *  for example, c -> 12 */
-int chartoint(char c) {
+int ctoi(char c) {
 
 	if (48 <= c && c <= 57) {
 		return c - 48;
@@ -72,7 +115,7 @@ int chartoint(char c) {
 
 /* converts integer into hex character representation
 *  for example, 10 -> a */
-char inttochar(int i) {
+char itoc(int i) {
 
 	if (0 <= i && i <= 9) {
 		return i + 48;

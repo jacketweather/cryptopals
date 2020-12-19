@@ -25,19 +25,34 @@ void tests1c2(void) {
 
 void tests1c3(void) {
 	char src[69] = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
-
 	pair<string, size_t> answer = singleByteXORCipher(src, sizeof(src) - 1);
-	cout << "Answer is " << answer.first << " with key " << answer.second << "\n";
+	assert(answer.first == "Cooking MC's like a pound of bacon");
+	cout << "Challenge 3: String is " << answer.first << " with key " << answer.second << "\n";
 
 }
+
+void tests1c4(void) {
+	string s = challenge4();
+	assert(s == "Now that the party is jumping");
+	cout << "Challenge 4: String is " << s << "\n";
+}
+
+void tests1c5(void) {
+	string s1("Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal");
+	assert(repeatingKeyXOR(s1, "ICE") == "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f");
+}
+
 
 int main(void) {
 
 	teststrcmp();
 	printf("Passed util funcs tests.\n");
-	tests1c1();
-	tests1c2();
-	tests1c3();
+
+	//tests1c1();
+	//tests1c2();
+	//tests1c3();
+	//tests1c4();
+	//tests1c5();
 	printf("Passed all tests.\n");
 	getchar();
 

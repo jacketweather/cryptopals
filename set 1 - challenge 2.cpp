@@ -12,7 +12,7 @@ void fixedxor(const char* s1, const char* s2, char* dst, size_t length) {
 	char term = '\0';
 
 	for (size_t i = 0; i < length; ++i) {
-		dst[i] = inttochar(chartoint(s1[i]) ^ chartoint(s2[i]));
+		dst[i] = itoc(ctoi(s1[i]) ^ ctoi(s2[i]));
 	}
 	dst[length] = term;
 }

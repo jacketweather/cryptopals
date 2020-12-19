@@ -22,9 +22,9 @@ void hextobase64(char* src, char* dst, int size) {
 	// get three characters at a time
 	for (unsigned int idx = 0; idx < size; idx += 3) {
 		
-		int one = chartoint(src[idx]);
-		int two = chartoint(src[idx + 1]);
-		int three = chartoint(src[idx + 2]);
+		int one = ctoi(src[idx]);
+		int two = ctoi(src[idx + 1]);
+		int three = ctoi(src[idx + 2]);
 
 		int c1 = (one << 2) + (two >> 2);
 		int c2 = ((two & 3) << 4) + three;
